@@ -1,0 +1,145 @@
+package com.google.challenges;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Answer2 {
+	
+	@SuppressWarnings("static-access")
+	public static StringBuilder largestNumFormation (int[] arr){
+
+		String [] num = new String[arr.length];
+
+	    for (int i =0 ; i < arr.length ; i++){
+
+	        num[i] = String.valueOf(arr[i]);            
+	    }
+
+	    Arrays.sort(num, new Comparator<String>(){
+
+	        public int compare (String left, String right){
+	            String leftRight = left.concat(right);
+	            String rightLeft = right.concat(left);
+	            return rightLeft.compareTo(leftRight);
+	        }           
+	    });
+
+	    StringBuilder sb = new StringBuilder();
+
+	    for (String n : num){
+	        sb.append(n);
+	    }
+	    
+	    int[] temp = new int[num.length];
+	    for (int j = 0; j <num.length; j++){
+	        temp[j] = (Integer.parseInt(num[j]));
+	    }
+
+	    Combinations cb = new Combinations();
+	    for (int i = temp.length; i > 2; i--) {
+	    	int[] res = new int[i];
+	    	cb.doCombine(temp, res, 0, 0, i); //combine(temp,i);	
+		}
+	    
+	    
+	    return sb;
+
+	}
+	
+	public static int answer(int[] l){
+		Arrays.sort(l);
+		System.out.println(Arrays.toString(l));
+		
+		int largestNumber = 0;
+		for (int i = l.length-1; i >= 0; i--) {
+		  for (int j = 0; j < l[i]; j++) {
+		    largestNumber = largestNumber * 10 + i;
+		  }
+		}		
+		
+		//System.out.println(largestNumber);
+		
+		System.out.println(largestNumFormation(l));
+		
+		if(largestNumber % 3==0)
+			return largestNumber;
+		else
+			return 0;
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		//int[] l = {3, 1, 4, 1};
+		int[] l = {3, 1, 4, 1, 5, 9};
+		
+		System.out.println(answer(l));
+
+	}
+
+}
+
+
+
+
+
+
+---------------------------------------
+package com.google.challenges;
+
+import java.util.Arrays;
+
+public class Combinations {
+
+	public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 4, 5};
+        int r = 3;
+        Arrays.sort(arr);
+        combine(arr, r);
+    }
+
+    public static void combine(int[] arr, int r) {
+        int[] res = new int[r];
+        doCombine(arr, res, 0, 0, r);
+    }
+
+
+
+    public static void doCombine(int[] arr, int[] res, int currIndex, int level, int r) {
+        int doCombineflag=0;
+    	if(level == r){
+    			doCombineflag = printArray(res);
+    			if(doCombineflag == 0)
+    			return;
+        }
+    	if(doCombineflag == 0){
+    		for (int i = currIndex; i < arr.length; i++) {
+                res[level] = arr[i];
+                doCombine(arr, res, i+1, level+1, r);
+                //way to avoid printing duplicates
+                //if(i < arr.length-1 && arr[i] == arr[i+1]){
+                //    i++;
+                //}
+            }
+    	}        
+    }
+
+    private static int printArray(int[] res) {
+        String temp="";
+        int flag=0;
+        
+        if(flag == 0){
+        	for (int i = 0; i < res.length; i++) {
+                //System.out.print(res[i] + "");
+                temp = temp+res[i];
+            }
+            if( Integer.parseInt(temp) % 3 == 0)
+        	{
+            	System.out.println("divisible by 3 "+temp);
+            	flag=1;
+            }
+            System.out.println();
+        }
+        return flag;
+    }
+}
