@@ -1402,85 +1402,102 @@ public class A7_4 {
 		//int[][] res = answer(2, 2);
 		//int[][] res = answer(3, 1);
 		//int[][] res = answer(4, 4);
-		//int[][] res = answer(1, 1);			//Checked  = 0
-		int[][] res = answer(5,6);			//Checked  = 0,0
-		//int[][] res = answer(3, 1);			//Checked  = 0,0,0
-		//int[][] res = answer(4, 1);			//Checked  = 0
-		//int[][] res = answer(5, 1);			//Checked  = 0
-		
+		//int[][] res = answer(1, 1);			
+			
+		printArray(answer(3, 1));
+		printArray(answer(3, 2));
+		printArray(answer(3, 3));
+		printArray(answer(1, 1));
+		printArray(answer(2, 1));
+		printArray(answer(2, 2));
+		printArray(answer(5, 3));
+		printArray(answer(7, 2));
+		printArray(answer(9, 5));
+		printArray(answer(8, 2));
+	}
+	
+	public static void printArray(int[][] res)	{
 		for (int[] is : res) {
 			for (int i : is) {
-				System.out.println(i);
+				System.out.print(i+"     ");
 			}
+			System.out.println();
 		}
+		System.out.println("\nNext");
 	}
 	
 	public static int[][] answer(int num_buns, int num_required){
 		
-		 if(num_buns == num_required){
-			 return(equal(num_buns, num_required)); //When bunnies available == locks to be opened
-		 }
-		 else if(num_buns>num_required){
-			 ArrayList<ArrayList<Integer>> listOLists = combination(num_buns, num_required);
-			 ArrayList<ArrayList<Integer>> listOLists2 = new ArrayList<ArrayList<Integer>>();
-			 
-			 //Removing empty array from the list
-			 for (ArrayList<Integer> arrayList : listOLists) {
-				 if(arrayList.size()!=0)
-					 listOLists2.add(arrayList);
-			}
-			 
-			 //System.out.println(listOLists2);
-			 
-			 ArrayList<ArrayList<Integer>> minionList = new ArrayList<ArrayList<Integer>>(num_buns);
-			 ArrayList<Integer> tempArr = new ArrayList<Integer>();
-			 
-			 for (int i = 0; i < num_buns; i++) {
-					minionList.add(tempArr);
-			}
-			 //System.out.println(minionList);
-			 	 
-			 
-			 int index = 0;
-			 for (ArrayList<Integer> item : listOLists2) {
-				for (Integer key : item) {
-					if(index == 0){
-						ArrayList<Integer> temp = new ArrayList<Integer>();
-						temp.add(index);
-						minionList.remove(key-1);
-						minionList.add((key-1),temp);
-					}
-					else{
-						ArrayList<Integer> temp = new ArrayList<Integer>();
-						temp = new ArrayList<Integer>(minionList.get(key-1));
-						minionList.remove(key-1);
-						temp.add(index);					
-						minionList.add((key-1),temp);
-						//System.out.println(minionList);
-					}
-					
-				}
-				index++;
+		if(num_buns >= 1 && num_buns <= 9 && num_required >= 0 && num_required <= 9){
+			if(num_buns == num_required){
+				 return(equal(num_buns, num_required)); //When bunnies available == locks to be opened
 			 }
-			 //System.out.println(minionList);
-			 
-			 		 
-			 int size2 = minionList.get(0).size();
-			 int[][] finalArr = new int[num_buns][size2];
-			 //int size3 = minionList.get(0).get(1);
-			 //System.out.println(size2+" "+size3);
-			 
-			 for (int i = 0; i < finalArr.length; i++) {
-				for (int j = 0; j < size2; j++) {
-					finalArr[i][j] = minionList.get(i).get(j);
+			 else if(num_buns>(num_required-1)){
+				 ArrayList<ArrayList<Integer>> listOLists = combination(num_buns, num_required);
+				 ArrayList<ArrayList<Integer>> listOLists2 = new ArrayList<ArrayList<Integer>>();
+				 
+				 //Removing empty array from the list
+				 for (ArrayList<Integer> arrayList : listOLists) {
+					 if(arrayList.size()!=0)
+						 listOLists2.add(arrayList);
 				}
-			}
-			 return finalArr;
-		 }
-		 else{
+				 
+				 //System.out.println(listOLists2);
+				 
+				 ArrayList<ArrayList<Integer>> minionList = new ArrayList<ArrayList<Integer>>(num_buns);
+				 ArrayList<Integer> tempArr = new ArrayList<Integer>();
+				 
+				 for (int i = 0; i < num_buns; i++) {
+						minionList.add(tempArr);
+				}
+				 //System.out.println(minionList);
+				 	 
+				 
+				 int index = 0;
+				 for (ArrayList<Integer> item : listOLists2) {
+					for (Integer key : item) {
+						if(index == 0){
+							ArrayList<Integer> temp = new ArrayList<Integer>();
+							temp.add(index);
+							minionList.remove(key-1);
+							minionList.add((key-1),temp);
+						}
+						else{
+							ArrayList<Integer> temp = new ArrayList<Integer>();
+							temp = new ArrayList<Integer>(minionList.get(key-1));
+							minionList.remove(key-1);
+							temp.add(index);					
+							minionList.add((key-1),temp);
+							//System.out.println(minionList);
+						}
+						
+					}
+					index++;
+				 }
+				 //System.out.println(minionList);
+				 
+				 		 
+				 int size2 = minionList.get(0).size();
+				 int[][] finalArr = new int[num_buns][size2];
+				 //int size3 = minionList.get(0).get(1);
+				 //System.out.println(size2+" "+size3);
+				 
+				 for (int i = 0; i < finalArr.length; i++) {
+					for (int j = 0; j < size2; j++) {
+						finalArr[i][j] = minionList.get(i).get(j);
+					}
+				}
+				 return finalArr;
+			 }
+			 else{
+				 int[][] finalArr = new int[0][0];
+				 return finalArr;
+			 }
+		}else{
 			 int[][] finalArr = new int[0][0];
 			 return finalArr;
 		 }
+		
 	}
 	
 	static ArrayList<ArrayList<Integer>> accumulated2 = new  ArrayList<ArrayList<Integer>>();
@@ -1494,8 +1511,10 @@ public class A7_4 {
 			arr.add(i);
 	        answer.add(branches(q - n, i, q, arr)); 
 	        i += 1;
-		} 
-		return accumulated2;
+		}
+		ArrayList<ArrayList<Integer>> accumulated1 = new  ArrayList<ArrayList<Integer>>(accumulated2);
+		accumulated2 = new ArrayList<ArrayList<Integer>>();
+		return accumulated1;
 	}
 	
 	public static ArrayList<Integer> branches(int bunniesLeft, int currentBranch, int rabbitsLeft, ArrayList<Integer> items){
@@ -1535,6 +1554,7 @@ public class A7_4 {
 		 return res;
 	}
 }
+
 
 
 -------------------------------------------------------------------------------------------------------------------------------
