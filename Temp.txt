@@ -16,3 +16,14 @@ https://www.google.com/foobar/?usg=AG3vBD1adwlap7nkQEAu9Ppn7XF8IiGRrQ&referrer=D
 https://github.com/Ch1pStar/Foobar
 
 https://github.com/xphoniex/Google-Foobar
+
+
+
+
+//Links for deployment of angularjs + java restful backend project
+
+https://stackoverflow.com/questions/17947084/how-to-host-an-angularjs-app-in-domain
+
+https://stackoverflow.com/questions/34395717/deploy-angular-app-in-wildfly
+
+https://stackoverflow.com/questions/33127746/single-page-application-with-java-ee-wildfly-server-side-configuration?rq=1
