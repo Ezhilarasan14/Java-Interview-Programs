@@ -27,3 +27,10 @@ https://stackoverflow.com/questions/17947084/how-to-host-an-angularjs-app-in-dom
 https://stackoverflow.com/questions/34395717/deploy-angular-app-in-wildfly
 
 https://stackoverflow.com/questions/33127746/single-page-application-with-java-ee-wildfly-server-side-configuration?rq=1
+
+//----------------------Angular-----------------------------------------------
+http://oniwebblog.blogspot.in/2016/01/general-crud-application-using.html
+
+https://www.sitepoint.com/introduction-mean-stack/
+
+https://www.guru99.com/angularjs-testing-unit.html
